@@ -1,6 +1,7 @@
 package com.example.starwarspersonaje.ui.theme.screens.Personajes.Personaje
 
 import android.provider.CalendarContract
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -71,21 +72,37 @@ fun PersonajeCreacion(modifier: Modifier = Modifier, viewModel: PersonajeViewMod
         permissions = listOf(AppPermissions.Notifications),
         onAllGranted = {
 
-            notificationHandler.showSimpleNotification(
-                contentTitle = "Personaje creado",
-                contentText = "Se ha dado de alta ${state.nombre}" // ui state ????
-            )
-            goToBack()
+            //notificationHandler.showSimpleNotification(
+             //   contentTitle = "Personaje creado",
+               // contentText = "Se ha dado de alta ${state.nombre}" // ui state ????
+            //)
+            //goToBack()
+            viewModel.addPersonaje()
         },
-        onDenied = {
+        onDenied = { denied ->
+
+            Toast.makeText(
+                context,
+                "Necesitamos permiso para mostrar notificaciones al crear personajes",
+                Toast.LENGTH_LONG
+            ).show()
+
             // Opcional: si no concede, puedes avisar con snackbar
            // onShowSnackbar("Permiso de notificaciones denegado")
-            goToBack()
+
         }
     )
 
     LaunchedEffect(state.isSaved) {
-        if (state.isSaved) goToBack()
+        if (state.isSaved) {
+
+            notificationHandler.showSimpleNotification(
+                contentTitle = "Elemento creado",
+                contentText = "Personaje ${state.nombre} creado con exito"
+            )
+
+            goToBack()
+        }
     }
 
 
@@ -98,7 +115,10 @@ fun PersonajeCreacion(modifier: Modifier = Modifier, viewModel: PersonajeViewMod
         onChangeFechaNac = viewModel::onChangeFechaNac,
         onChangeColorOjos = viewModel::onChangeColorDeOjos,
         onChangeIsInmortal = viewModel::onChangeIsInmortal,
-        onConfirmar = viewModel::addPersonaje,
+        //onConfirmar = viewModel::addPersonaje,
+        onConfirmar = {
+            requestNotificationPermissionThenNotify()
+        }
     )
 
 

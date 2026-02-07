@@ -115,9 +115,9 @@ abstract class StartWarsDatabase : RoomDatabase() {
                 // 2LUEGO personajes
                 personajeDao.insert(
                     Personaje(
-                        nombre = "Aelion Vark",
+                        nombre = "Aelion",
                         planetaId = 2,
-                        genero = "Masculino",
+                        genero = "Male",
                         fechanac = "10-10-2000",
                         colorDeOjos = "Azul",
                         IsInmortal = false
@@ -127,7 +127,7 @@ abstract class StartWarsDatabase : RoomDatabase() {
                     Personaje(
                         nombre = "Pedrito",
                         planetaId = 1,
-                        genero = "Masculino",
+                        genero = "Female",
                         fechanac = "10-10-2000",
                         colorDeOjos = "Verde",
                         IsInmortal = false

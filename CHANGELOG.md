@@ -4,6 +4,19 @@ Todos los cambios importantes de este proyecto se documentan aquí.
 La versión actual corresponde a la **Tarea 3**, implementando MVVM, Jetpack Compose y otras mejoras sobre la Tarea 2.
 
 ---
+## [1.3.0] - Tarea 4 (2025-2-7)
+### Added
+
+- Implementacion de room para poder utilizar una base de datos y mantener los datos a pesar de reincios
+- Implementacion de los Dao y Entidades
+- Implementacion de un Drawer para mejor navegacion 
+- Implementacion de film y planeta (estan comentadas las lineas de esto)
+- Implementacion de control de permisos 
+- Implementacion de comprobacion de nombre existente al crear
+- Implementacion de notificaciones al crear un personaje (si se rechaza el permiso no cse crea)
+
+### Fixed
+- Arregle errores de validacion de campos relacionado a sus creaciones y ediciones
 
 ## [1.3.0] - Tarea 3 (2025-12-19)
 ### Added

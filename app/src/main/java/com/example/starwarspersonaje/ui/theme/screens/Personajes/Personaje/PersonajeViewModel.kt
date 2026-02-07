@@ -145,15 +145,23 @@ class PersonajeViewModel @Inject constructor(
 
 
     fun addPersonaje()
-
-
     {
 
         if (!validarFormulario()) return
 
+
         val personaje = createdPersonaje()
 
         viewModelScope.launch {
+
+
+            if (nombreRepetido()) {
+                state = state.copy(
+                    mensajeError = "Ya existe un personaje con ese nombre"
+                )
+                return@launch //es un return pero en una corrutina
+            }
+
             val result = personajeRepository.addPersonaje(personaje) //le cambie antes add
 
             if(result is BaseResult.Succes)
@@ -235,6 +243,21 @@ class PersonajeViewModel @Inject constructor(
         }
 
         return  condicion
+
+    }
+
+    suspend fun nombreRepetido() : Boolean
+    {   //search si encuengtra true si no false
+
+        val condicion = personajeRepository.searchPersonajeName(state.nombre)
+
+        if(condicion){
+            return  true
+        }else
+        {
+            return false
+        }
+
 
     }
 

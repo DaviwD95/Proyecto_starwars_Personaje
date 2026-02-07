@@ -43,7 +43,8 @@ data class PersonajeListEvents(
 
     val onEditPersonaje: (Personaje) -> Unit,
     val onAddPersonaje: () -> Unit,
-    val onLongClick : (Personaje) -> Unit //delete pues
+    val onLongClick : (Personaje) -> Unit, //delete pues
+    val onOrdenar : () -> Unit
     )
 
 
@@ -61,7 +62,8 @@ fun PersonajeListScreen(modifier: Modifier, goToAdd : () -> Unit, goToEdit : (Pe
         onAddPersonaje = goToAdd,
         onLongClick = {personaje ->
             personajeSeleccionado = personaje
-            showAlert = true }
+            showAlert = true },
+        onOrdenar = viewModel:: ordenar
     )
 
     var state = viewModel.state

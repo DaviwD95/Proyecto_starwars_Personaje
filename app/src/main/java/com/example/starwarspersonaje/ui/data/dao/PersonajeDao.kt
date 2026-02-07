@@ -21,11 +21,15 @@ interface PersonajeDao {
     suspend fun update(personaje: Personaje)
 
     @Query("SELECT * FROM personaje")
-    fun getAll () : Flow<List<Personaje>>//Lo tengo que hacer con un flujo pepe, pendiente cambiar
+    fun getAll(): Flow<List<Personaje>>//Lo tengo que hacer con un flujo pepe, pendiente cambiar
 
     @Query("SELECT EXISTS (SELECT * FROM personaje WHERE personaje.id = :id )")
-    suspend fun exists(id : Int): Boolean
+    suspend fun exists(id: Int): Boolean
 
     @Query("SELECT * FROM personaje WHERE id = :id")
-    suspend fun getByID(id : Int) : Personaje?
+    suspend fun getByID(id: Int): Personaje?
+
+    @Query("SELECT EXISTS (SELECT 1 FROM personaje WHERE personaje.nombre = :nombre)")
+    suspend fun getByNombre(nombre: String): Boolean
+
 }

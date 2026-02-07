@@ -51,6 +51,23 @@ class PersonajeRepository @Inject constructor(
 
     }
 
+    suspend fun searchPersonajeName(name : String) : Boolean {
+
+        delay(2000)
+
+        val found = personajesDataBase.getByNombre(nombre = name) //true o false
+
+        if(found) {
+            return true;
+
+
+        } else {
+            return false
+        }
+
+
+    }
+
     fun getSelected(): Personaje? = selectedPersonaje
 
 

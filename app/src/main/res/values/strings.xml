@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">StarwarsPersonaje</string>
+    <string name="confirmar">"Confirmar "</string>
+    <string name="inmortal">"Es inmortal "</string>
+    <string name="CreacionBienvenida">"Bienvenido a la Creacion de tu personaje "</string>
+    <string name="confirmarEdicion">Pulse para confirmar edicion</string>
+    <string name="EdicionBienvenida">"Bienvenido a la Edicion de tu Personaje "</string>
+    <string name="NombreAboutUs">El creador de la clase Persona es David Alejandro Garcia Quintero</string>
+    <string name="InfoAboutUs">Esta clase es parte de un conjunto de clases mucho mas grande, la tematica principal de estas es starwars</string>
+    <string name="CentroAboutUs">El Centro quien organizo este proyecto es I.E.S Portada Alta</string>
+    <string name="nombre_credencial">Nombre de tarjeta de Personaje</string>
+    <string name="no_data">No hay data aun</string>
+
+</resources>

@@ -28,15 +28,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.starwarspersonaje.R
 import com.example.starwarspersonaje.ui.base.screens.AlertDialogOkCancel
 import com.example.starwarspersonaje.ui.base.screens.NoDataScreen
+import com.example.starwarspersonaje.ui.common.AppSpacing
 import com.example.starwarspersonaje.ui.common.CardStyle
 import com.example.starwarspersonaje.ui.common.LocalCardStyle
-import com.example.starwarspersonaje.ui.common.PaddingScreen
 import com.example.starwarspersonaje.ui.data.models.Personaje
+import com.example.starwarspersonaje.ui.theme.StarwarsPersonajeTheme
 
 
 data class PersonajeListEvents(
@@ -127,9 +130,11 @@ fun PersonajeListContent(modifier: Modifier, events : PersonajeListEvents,lista 
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(horizontal = 12.dp)
                 .padding(paddingValues),
+
             state =lazyState,
-        verticalArrangement = Arrangement.spacedBy(PaddingScreen.medium)
+        verticalArrangement = Arrangement.spacedBy(AppSpacing.md)
     ) {
 
         items(lista) { personaje ->
@@ -159,15 +164,18 @@ fun PersonajeItem(modifier: Modifier = Modifier, personaje: Personaje)
 
         shape = MaterialTheme.shapes.medium,
         modifier = modifier,
-        colors = CardDefaults.cardColors(CardStyle.containerColor),
-        elevation = CardDefaults.cardElevation(defaultElevation = CardStyle.elevation),
+        colors = CardDefaults.cardColors(
+            containerColor = LocalCardStyle.current.containerColor,
+            contentColor = Color.Yellow //white quizas
+        ),
+        elevation = CardDefaults.cardElevation(LocalCardStyle.current.elevation),
 
         )
     {
 
         Row(
 
-            modifier = Modifier.fillMaxWidth().padding(PaddingScreen.small)
+            modifier = Modifier.fillMaxWidth().padding(LocalCardStyle.current.padding)
         )
         {
             Image(
@@ -238,6 +246,45 @@ fun PersonajeItem(modifier: Modifier = Modifier, personaje: Personaje)
 
 
 
+}
+
+//Para daltonicos y Personas que quieren la letra mas grandecita
+@Preview(
+    showBackground = true,
+    showSystemUi = true,
+    fontScale = 1.5f,
+    backgroundColor = 0xFF0D47A1
+
+)
+@Composable
+fun PersonajeListScreenPreviewDaltonicoFuenteGrande()
+{
+    StarwarsPersonajeTheme(colorBlind = true) {
+
+
+        // Mock de datos de ejemplo
+        val personajesFake = listOf(
+            Personaje(id = 1, nombre = "Luke Skywalker", planetaId = 1, genero = "Male", colorDeOjos = "Azul", fechanac = "20-210-2000", IsInmortal = false),
+            Personaje(id = 2, nombre = "Leia Organa", planetaId = 2, genero = "Female", colorDeOjos = "Verde", fechanac = "20-210-2000", IsInmortal = false),
+            Personaje(id = 3, nombre = "Hermaphrodita Jedi", planetaId = 3, genero = "Hermaphrodite", colorDeOjos = "Azul", fechanac = "20-210-2000", IsInmortal = true),
+        )
+
+        // Mock de eventos (no hacen nada en preview)
+        val eventosFake = PersonajeListEvents(
+            onEditPersonaje = {},
+            onAddPersonaje = {},
+            onLongClick = {},
+            onOrdenar = {}
+        )
+
+        StarwarsPersonajeTheme(colorBlind = true) {
+            PersonajeListContent(
+                modifier = Modifier.fillMaxSize(),
+                events = eventosFake,
+                lista = personajesFake
+            )
+        }
+    }
 }
 
 

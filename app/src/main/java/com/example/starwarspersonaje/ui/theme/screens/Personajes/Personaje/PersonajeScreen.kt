@@ -17,14 +17,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.starwarspersonaje.ui.data.models.Errors.NombreError
 import com.example.starwarspersonaje.ui.data.models.Personaje
 import com.example.starwarspersonaje.ui.data.models.Planet
 import com.example.starwarspersonaje.ui.helper.AppPermissions
 import com.example.starwarspersonaje.ui.helper.NotificationHandler
 import com.example.starwarspersonaje.ui.helper.rememberPermissionsLauncher
+import com.example.starwarspersonaje.ui.theme.StarwarsPersonajeTheme
 import com.example.starwarspersonaje.ui.theme.componentes.ColorOjosDropdown
 import com.example.starwarspersonaje.ui.theme.componentes.ConfirmarButton
 
@@ -234,4 +237,46 @@ fun PersonajeContent(modifier : Modifier = Modifier, state : PersonajeState,
 
 
 
+}
+//Para daltonicos y Personas que quieren la letra mas grandecita
+@Preview(
+    showBackground = true,
+    showSystemUi = true,
+    fontScale = 1.5f,
+    backgroundColor = 0xFF0D47A1
+)
+@Composable
+fun PersonajeScreenPreviewDaltonicoFuenteGrande() {
+
+    StarwarsPersonajeTheme(colorBlind = true) {
+
+        val fakeState = PersonajeState(
+            id = 1,
+            nombre = "Luke Skywalker",
+            planetaDeOrigen = "Tatooine",
+            genero = "Masculino",
+            fechanac = "19 BBY",
+            colorDeOjos = "Azules",
+            IsInmortal = false,
+            mensajeError = "",
+            nombreError = NombreError.Ninguno,
+            isSaved = false
+        )
+
+        val fakeEvents = PersonajeEvents(
+            onChangeNombre = {},
+            onChangePlaneta = {},
+            onChangeGenero = {},
+            onChangeFechaNac = {},
+            onChangeColorOjos = {},
+            onChangeIsInmortal = {},
+            onConfirmar = {}
+        )
+
+        PersonajeContent(
+            state = fakeState,
+            events = fakeEvents,
+            title = "Creación"
+        )
+    }
 }

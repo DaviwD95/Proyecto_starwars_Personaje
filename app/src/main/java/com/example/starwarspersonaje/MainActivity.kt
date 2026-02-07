@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -33,13 +34,18 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.starwarspersonaje.ui.common.AppSpacing
+import com.example.starwarspersonaje.ui.common.CardStyle
+import com.example.starwarspersonaje.ui.common.LocalCardStyle
 import com.example.starwarspersonaje.ui.home.NavHostScreen
 import com.example.starwarspersonaje.ui.theme.screens.Info.AboutUsScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,87 +67,100 @@ class MainActivity : ComponentActivity()  {
 
             StarwarsPersonajeTheme {
 
-                ModalNavigationDrawer(
-                    drawerState = drawerState,
-                    drawerContent = {
-
-                        ModalDrawerSheet {
-
-                            Text(
-                                text = "Menú Star Wars",
-                                modifier = Modifier.padding(16.dp)
-                            )
-
-                            HorizontalDivider()
-
-                            NavigationDrawerItem(
-                                label = { Text("Listado Personajes") },
-                                selected = false,
-                                onClick = {
-                                    navController.navigate(Routes.LIST)
-                                    scope.launch { drawerState.close() }
-                                }
-                            )
-
-                            NavigationDrawerItem(
-                                label = { Text("Añadir Personaje") },
-                                selected = false,
-                                onClick = {
-                                    navController.navigate(Routes.ADD)
-                                    scope.launch { drawerState.close() }
-                                }
-                            )
-
-                            NavigationDrawerItem(
-                                label = { Text("Acerca de") },
-                                selected = false,
-                                onClick = {
-                                    navController.navigate(Routes.ABOUTUS)
-                                    scope.launch { drawerState.close() }
-                                }
-                            )
-                        }
-                    }
-                ) {
-
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize(),
-                        contentWindowInsets = WindowInsets(0),
-
-                        topBar = {
-
-                            TopAppBar(
-                                title = { Text("Personaje") },
-
-                                navigationIcon = {
-
-                                    IconButton(onClick = {
-                                        scope.launch {
-                                            drawerState.open()
-                                        }
-                                    }) {
-                                        Icon(Icons.Default.Menu, "menu")
-                                    }
-
-                                },
-
-                                actions = {
-
-                                    IconButton(onClick = { navController.navigate(Routes.ADD) }) {
-                                        Icon(Icons.Default.Add, null)
-                                    }
-
-                                }
-                            )
-                        }
-                    ) { innerPadding ->
-
-                        NavHostScreen(
-                            navController = navController,
-                            modifier = Modifier.padding(innerPadding)
+                CompositionLocalProvider(
+                    LocalCardStyle provides CardStyle(
+                        elevation = 8.dp,
+                        containerColor = Color(0xFF1C1C1C),
+                        padding = PaddingValues(
+                            horizontal = AppSpacing.lg,
+                            vertical = AppSpacing.md
                         )
+                    )
+                ){
+                    ModalNavigationDrawer(
+                        drawerState = drawerState,
+                        drawerContent = {
+
+                            ModalDrawerSheet {
+
+                                Text(
+                                    text = "Menú Star Wars",
+                                    modifier = Modifier.padding(16.dp)
+                                )
+
+                                HorizontalDivider()
+
+                                NavigationDrawerItem(
+                                    label = { Text("Listado Personajes") },
+                                    selected = false,
+                                    onClick = {
+                                        navController.navigate(Routes.LIST)
+                                        scope.launch { drawerState.close() }
+                                    }
+                                )
+
+                                NavigationDrawerItem(
+                                    label = { Text("Añadir Personaje") },
+                                    selected = false,
+                                    onClick = {
+                                        navController.navigate(Routes.ADD)
+                                        scope.launch { drawerState.close() }
+                                    }
+                                )
+
+                                NavigationDrawerItem(
+                                    label = { Text("Acerca de") },
+                                    selected = false,
+                                    onClick = {
+                                        navController.navigate(Routes.ABOUTUS)
+                                        scope.launch { drawerState.close() }
+                                    }
+                                )
+                            }
+                        }
+                    ) {
+
+                        Scaffold(
+                            modifier = Modifier.fillMaxSize(),
+                            contentWindowInsets = WindowInsets(0),
+
+                            topBar = {
+
+                                TopAppBar(
+                                    title = { Text("Personaje") },
+
+                                    navigationIcon = {
+
+                                        IconButton(onClick = {
+                                            scope.launch {
+                                                drawerState.open()
+                                            }
+                                        }) {
+                                            Icon(Icons.Default.Menu, "menu")
+                                        }
+
+                                    },
+
+                                    actions = {
+
+                                        IconButton(onClick = { navController.navigate(Routes.ADD) }) {
+                                            Icon(Icons.Default.Add, null)
+                                        }
+
+                                    }
+                                )
+                            }
+                        ) { innerPadding ->
+
+                            NavHostScreen(
+                                navController = navController,
+                                modifier = Modifier.padding(innerPadding)
+                            )
+                        }
                     }
                 }
+
+
             }
         }
 

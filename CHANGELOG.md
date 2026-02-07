@@ -6,7 +6,8 @@ La versión actual corresponde a la **Tarea 3**, implementando MVVM, Jetpack Com
 ---
 ## [1.3.0] - Tarea 4 (2025-2-7)
 ### Added
-
+- Implementacion de Previews especiales para pantallas 
+- Implementacion de diseños comunes para la interfaz
 - Implementacion de room para poder utilizar una base de datos y mantener los datos a pesar de reincios
 - Implementacion de los Dao y Entidades
 - Implementacion de un Drawer para mejor navegacion 

@@ -31,10 +31,6 @@ import kotlinx.parcelize.Parcelize
      */
 
 )
-
-
-
-
 @Parcelize
 data class Personaje (
 

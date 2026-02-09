@@ -48,8 +48,10 @@ fun NavHostScreen(navController: NavHostController,modifier: Modifier) {
             enterTransition = { fadeIn(tween(400)) },
             exitTransition = { fadeOut(tween(400)) }
 
-        ){ PersonajeCreacion(
+        ){
+            PersonajeCreacion(
             Modifier,
+
             viewModel = hiltViewModel(),
             goToBack = {navController.popBackStack()}
 

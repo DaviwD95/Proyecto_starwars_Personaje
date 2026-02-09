@@ -5,7 +5,9 @@ import androidx.annotation.NonNull
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.starwar.data.converter.Converters
 import com.example.starwarspersonaje.ui.data.dao.FilmDAO
 import com.example.starwarspersonaje.ui.data.dao.PlanetDao
 import com.example.starwarspersonaje.ui.data.models.Film
@@ -18,6 +20,7 @@ import com.example.starwarspersonaje.ui.data.models.Planet
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.Executors
 
+@TypeConverters(Converters::class)
 @Database(
     version = 11,
     entities = [

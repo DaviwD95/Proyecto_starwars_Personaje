@@ -1,5 +1,7 @@
 package com.example.nagivigationviewmodel.data.network
 
+import dagger.hilt.InstallIn
+
 
 /**
  *

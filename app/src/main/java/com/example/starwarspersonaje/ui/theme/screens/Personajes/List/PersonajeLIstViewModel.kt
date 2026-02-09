@@ -42,6 +42,7 @@
 
             state = PersonajeListState.Loading
 
+
             viewModelScope.launch {
 
                 personajeRepository.getData().collect { personajes ->
